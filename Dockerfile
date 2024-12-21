@@ -1,16 +1,10 @@
 FROM ubuntu:22.04
 
-ENV TERM=xterm-256color
-ENV COLORTERM=truecolor
-ENV LC_ALL=C.UTF-8
-
 ARG USERNAME=user
 ARG USER_UID=1000
 ARG USER_GID=$USER_UID
 
-RUN /bin/sh -c echo 'Asia/Bangkok' > /etc/timezone && \
-    ln -s /usr/share/zoneinfo/Asia/Bangkok /etc/localtime && \
-    apt-get update && apt-get install -y --no-install-recommends sudo tzdata && \
+RUN apt-get update && apt-get install -y --no-install-recommends sudo && \
     rm -rf /var/lib/apt/lists/*
 
 RUN groupadd -g  $USER_GID $USERNAME && \
@@ -21,9 +15,11 @@ RUN groupadd -g  $USER_GID $USERNAME && \
 USER $USERNAME
 WORKDIR /home/$USERNAME
 
-COPY --chown=$USERNAME:$USERNAME asset /home/$USERNAME
+# COPY --chown=$USERNAME:$USERNAME asset /home/$USERNAME
 
-COPY setup.sh /tmp
-RUN sudo chmod +x /tmp/setup.sh && /tmp/setup.sh
+# COPY setup-zsh.sh /tmp
+# RUN sudo chmod +x /tmp/setup-zsh.sh && /tmp/setup-zsh.sh
+
+RUN sh -c "$(wget https://raw.githubusercontent.com/Logical05/zsh-template/refs/heads/main/setup.sh -O -)"
 
 ENTRYPOINT [ "/bin/zsh" ]

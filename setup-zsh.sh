@@ -2,15 +2,24 @@
 
 set -e
 
+export TERM=xterm-256color
+export COLORTERM=truecolor
+export LC_ALL=C.UTF-8
+
 sudo apt-get update && sudo apt-get install -y software-properties-common && sudo rm -rf /var/lib/apt/lists/*
 sudo add-apt-repository ppa:neovim-ppa/stable
 
-sudo apt-get update && sudo apt-get install -y --no-install-recommends zsh wget git exa tmux neovim curl && sudo rm -rf /var/lib/apt/lists/*
+sudo echo 'Asia/Bangkok' > /etc/timezone
+sudo ln -s /usr/share/zoneinfo/Asia/Bangkok /etc/localtime
+
+sudo apt-get update && sudo apt-get install -y --no-install-recommends zsh wget git exa tmux neovim curl tzdata && sudo rm -rf /var/lib/apt/lists/*
 
 sudo apt-get update && sudo apt-get upgrade -y && sudo rm -rf /var/lib/apt/lists/*
 sudo apt-get autoremove -y
 sudo apt-get clean -y
 
+git clone https://github.com/Logical05/zsh-template.git /tmp
+cp /tmp/asset ~
 
 sh -c "$(wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)"
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
