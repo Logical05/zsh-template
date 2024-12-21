@@ -97,10 +97,10 @@ This image comes with default configurations for Zsh, Tmux, and Neovim. You can 
     - Edit color scheme in `~/.config/nvim/colors`.
     - Used [NeoSolarized](https://github.com/iCyMind/NeoSolarized).
 
-# Contributing
+## Contributing
 
 Feel free to open issues or pull requests to improve this image. Contributions are welcome!
 
-# License
+## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
