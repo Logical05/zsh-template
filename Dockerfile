@@ -21,7 +21,7 @@ RUN groupadd -g  $USER_GID $USERNAME && \
 USER $USERNAME
 WORKDIR /home/$USERNAME
 
-COPY --chown=$USERNAME:$USERNAME config /home/$USERNAME
+COPY --chown=$USERNAME:$USERNAME asset /home/$USERNAME
 
 COPY setup.sh /tmp
 RUN sudo chmod +x /tmp/setup.sh && /tmp/setup.sh

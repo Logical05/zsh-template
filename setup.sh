@@ -5,7 +5,7 @@ set -e
 sudo apt-get update && sudo apt-get install -y software-properties-common && sudo rm -rf /var/lib/apt/lists/*
 sudo add-apt-repository ppa:neovim-ppa/stable
 
-sudo apt-get update && sudo apt-get install -y --no-install-recommends zsh wget git exa tmux neovim && sudo rm -rf /var/lib/apt/lists/*
+sudo apt-get update && sudo apt-get install -y --no-install-recommends zsh wget git exa tmux neovim curl && sudo rm -rf /var/lib/apt/lists/*
 
 sudo apt-get update && sudo apt-get upgrade -y && sudo rm -rf /var/lib/apt/lists/*
 sudo apt-get autoremove -y
@@ -40,3 +40,10 @@ git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
 tmux new-session -s _ -d
 tmux source ~/.tmux.conf
+
+sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
+       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+
+echo '\n
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh' >> ~/.zshrc
