@@ -2,9 +2,9 @@
 
 set -e
 
-export TERM=xterm-256color
-export COLORTERM=truecolor
-export LC_ALL=C.UTF-8
+TERM=xterm-256color
+COLORTERM=truecolor
+LC_ALL=C.UTF-8
 
 sudo apt-get update && sudo apt-get install -y software-properties-common && sudo rm -rf /var/lib/apt/lists/*
 sudo add-apt-repository ppa:neovim-ppa/stable

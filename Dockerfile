@@ -20,6 +20,6 @@ WORKDIR /home/$USERNAME
 # COPY setup-zsh.sh /tmp
 # RUN sudo chmod +x /tmp/setup-zsh.sh && /tmp/setup-zsh.sh
 
-RUN sh -c "$(wget https://raw.githubusercontent.com/Logical05/zsh-template/refs/heads/main/setup.sh -O -)"
+RUN sh -c "$(wget -O- https://raw.githubusercontent.com/Logical05/zsh-template/refs/heads/main/setup.sh)"
 
 ENTRYPOINT [ "/bin/zsh" ]
