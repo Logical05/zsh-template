@@ -1,4 +1,4 @@
-# [Zsh-Template](https://hub.docker.com/r/logical05/zshtemplate)
+# [Zsh-Template](https://hub.docker.com/r/logical05/zshtemplate) <a href="https://hub.docker.com/r/logical05/zshtemplate" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/docker-colored.svg" width="36" height="36" alt="Docker" /></a>
 
 This is a Docker image that installs and configures Zsh, [Oh My Zsh](https://ohmyz.sh/), [Tmux](https://github.com/tmux/tmux), [Neovim](https://neovim.io/), and various essential plugins. 
 This image simplifies setting up a terminal environment that can be used for development in Docker containers.
@@ -29,6 +29,7 @@ This image simplifies setting up a terminal environment that can be used for dev
 ## Usage
 
 [Docker image link](https://hub.docker.com/r/logical05/zshtemplate)
+
 - Getting this docker image
   ```zsh
   docker pull logical05/zshtemplate
