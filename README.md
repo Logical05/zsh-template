@@ -7,6 +7,7 @@ This image simplifies setting up a terminal environment that can be used for dev
 
 - [Requirement](#requirement)
 - [Usage](#usage)
+- [Post-Installation Actions](#post-installation-actions)
 - [Configuration](#configuration)
   - [Zsh](#zsh)
     - [Alias](#alias)
@@ -41,19 +42,54 @@ This image simplifies setting up a terminal environment that can be used for dev
   ```
   
 - Reconnect to container
-  1. list all the containers and find your container
+  1. List all the containers and find your container
      ```zsh
      docker ps -a
      ```
-  3. start the exited container
+  3. Start the exited container
      ```zsh
      docker start <container ID>
      ```
-  5. attach to your container
+  5. Attach to your container
      ```zsh
      docker attach <container ID>
      ```
-     
+- Usage within your Dockerfile
+   ```zsh
+   # Add non-root user
+   ARG USERNAME=user
+   ARG USER_UID=1000
+   ARG USER_GID=$USER_UID
+    
+   RUN apt-get update && apt-get install -y sudo && \
+       rm -rf /var/lib/apt/lists/* && \
+       groupadd -g  $USER_GID $USERNAME && \
+       useradd -m -u $USER_UID -g $USERNAME $USERNAME && \
+       echo $USERNAME ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/$USERNAME && \
+       chmod 0440 /etc/sudoers.d/$USERNAME
+
+   # Use a non-root user
+   USER $USERNAME
+   WORKDIR /home/$USERNAME
+
+   # Use the installation script
+   ADD --chown=$USERNAME:$USERNAME https://github.com/Logical05/zsh-template.git /tmp
+   RUN sudo chmod +x /tmp/setup-zsh.sh && /tmp/setup-zsh.sh
+   ```
+   - If your time is not set correctly, you can set it by adding these lines and changing the `TIMEZONE` value to your local time zone
+     ```zsh
+     ARG TIMEZONE=Asia/Bangkok
+     RUN /bin/sh -c echo '$TIMEZONE' > /etc/timezone && \
+         ln -s /usr/share/zoneinfo/$TIMEZONE /etc/localtime && \ 
+         apt-get update && apt-get install -y tzdata && \
+         rm -rf /var/lib/apt/lists/*
+     ```
+
+## Post-Installation Actions
+
+1. Reload the Tmux environment by pressing `Ctrl-s` + `Shift-i` while in Tmux.
+2. Install the Neovim plugins by pressing `:` and typing `PlugInstall` while in Neovim.
+
 ## Configuration
 
 This image comes with default configurations for Zsh, Tmux, and Neovim. You can customize these configurations by:
