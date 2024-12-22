@@ -73,8 +73,10 @@ This image simplifies setting up a terminal environment that can be used for dev
    WORKDIR /home/$USERNAME
 
    # Use the installation script
-   ADD --chown=$USERNAME:$USERNAME https://github.com/Logical05/zsh-template.git /tmp
-   RUN sudo chmod +x /tmp/setup-zsh.sh && /tmp/setup-zsh.sh
+   ARG path=/tmp
+   
+   ADD --chown=$USERNAME:$USERNAME https://github.com/Logical05/zsh-template.git $path
+   RUN sudo chmod +x $path/setup-zsh.sh && $path/setup-zsh.sh $path
    ```
    - If your time is not set correctly, you can set it by adding these lines and changing the `TIMEZONE` value to your local time zone
      ```zsh
