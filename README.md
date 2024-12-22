@@ -74,10 +74,14 @@ This image simplifies setting up a terminal environment that can be used for dev
 
    # Use the installation script
    ARG path=/tmp
-   
    ADD --chown=$USERNAME:$USERNAME https://github.com/Logical05/zsh-template.git $path
    RUN sudo chmod +x $path/setup-zsh.sh && $path/setup-zsh.sh $path
    ```
+   - If the `ADD` is not working correctly, you can use `git clone` instead
+     ```zsh
+     ARG path=/tmp/zsh-template
+     RUN git clone --depth=1 https://github.com/Logical05/zsh-template.git $path
+     ```
    - If your time is not set correctly, you can set it by adding these lines and changing the `TIMEZONE` value to your local time zone
      ```zsh
      ARG TIMEZONE=Asia/Bangkok
