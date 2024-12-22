@@ -2,6 +2,8 @@
 
 set -e
 
+mv /$1/asset/.[!.]* ~
+
 sudo apt-get update && sudo apt-get install -y software-properties-common && sudo rm -rf /var/lib/apt/lists/*
 sudo add-apt-repository ppa:neovim-ppa/stable
 
@@ -11,7 +13,6 @@ sudo apt-get update && sudo apt-get upgrade -y && sudo rm -rf /var/lib/apt/lists
 sudo apt-get autoremove -y
 sudo apt-get clean -y
 
-mv /tmp/asset/.[!.]* ~
 
 sh -c "$(wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)"
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k

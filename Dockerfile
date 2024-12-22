@@ -17,11 +17,13 @@ RUN /bin/sh -c echo '$TIMEZONE' > /etc/timezone && \
 USER $USERNAME
 WORKDIR /home/$USERNAME
 
-# If you want to create a docker image from the source, you need to uncomment COPY and comment ADD below.
-# COPY --chown=$USERNAME:$USERNAME asset /tmp/asset
-# COPY setup-zsh.sh /tmp
+ARG path=/tmp/test
 
-ADD --chown=$USERNAME:$USERNAME https://github.com/Logical05/zsh-template.git /tmp
-RUN sudo chmod +x /tmp/setup-zsh.sh && /tmp/setup-zsh.sh
+# If you want to create a docker image from the source, you need to uncomment COPY and comment ADD below.
+# COPY --chown=$USERNAME:$USERNAME asset $path/asset
+# COPY setup-zsh.sh $path
+ADD --chown=$USERNAME:$USERNAME https://github.com/Logical05/zsh-template.git $path
+
+RUN sudo chmod +x $path/setup-zsh.sh && $path/setup-zsh.sh $path
 
 ENTRYPOINT [ "/bin/zsh" ]
