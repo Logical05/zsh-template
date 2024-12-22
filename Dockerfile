@@ -17,7 +17,7 @@ RUN /bin/sh -c echo '$TIMEZONE' > /etc/timezone && \
 USER $USERNAME
 WORKDIR /home/$USERNAME
 
-ARG path=/tmp/test
+ARG path=/tmp
 
 # If you want to create a docker image from the source, you need to uncomment COPY and comment ADD below.
 # COPY --chown=$USERNAME:$USERNAME asset $path/asset
